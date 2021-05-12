@@ -7,6 +7,7 @@
  */
 
 /* API CALLS */
+// TODO: Remove access to API keys
 let getForecast = function (city, callback) {
   let mapKey = "AAbkWcOD8LbQjF40V04rYRQ1OwvAUGj0";
   let getLocationURL = `https://www.mapquestapi.com/geocoding/v1/address?key=${mapKey}&location=${city}`;
