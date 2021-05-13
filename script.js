@@ -18,13 +18,13 @@ let getForecast = function (city, callback) {
     .then(data => {
       let { lat, lng } = data.results[0].locations[0].latLng;
       let weatherKey = "980af6631660d1612310f85f534cac5e";
-      let getWeatherURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=minutely,hourly,alerts&units=imperial&appid=${weatherKey}`;
-
-      fetch(getWeatherURL)
-        .then(response => response.json())
-        .then(data => {
-          callback(data);
-        });
+      return `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=minutely,hourly,alerts&units=imperial&appid=${weatherKey}`;
+    })
+    .then(getWeatherURL => fetch(getWeatherURL))
+    .then(response => response.json())
+    .then(data => callback(data))
+    .catch(error => {
+      console.log(error);
     });
 };
 
@@ -41,7 +41,7 @@ let restoreSavedSearches = function (saved) {
 
 /* UPDATE DISPLAY */
 let updateCurrent = function (city, current) {
-  console.log(current);
+  // console.log(current);
   document.getElementById("city").textContent = city;
   document.getElementById("currentDate").textContent = `${new Date(
     current.dt * 1000
@@ -74,7 +74,7 @@ let uviColor = function (uvi) {
 };
 
 let updateForecast = function (forecast) {
-  console.log(forecast);
+  // console.log(forecast);
   let forecastGroup = document.getElementById("forecast");
 
   for (let i = 0; i < 5; i++) {
